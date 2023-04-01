@@ -75,7 +75,7 @@ function login() {
       width: 140px;
       height: 140px;
       border-radius: 50%;
-      background: url("~@/assets/images/logo.jpg") no-repeat center center;
+      background: url("~@/assets/images/avatar.jpg") no-repeat center center;
       background-size: cover;
       position: absolute;
       left: 50%;
