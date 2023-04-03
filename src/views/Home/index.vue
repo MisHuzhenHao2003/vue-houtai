@@ -9,6 +9,7 @@
           <Aside></Aside>
         </el-aside>
         <el-main>
+          <BreadCrumb></BreadCrumb>
           <router-view></router-view>
         </el-main>
       </el-container>

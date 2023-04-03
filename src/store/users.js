@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { reqGetUsers, reqUpdateUserState, reqAddUser, reqUpdateUserInfoById, reqDeleteUserById } from "@/utils/api";
+import { reqGetUsers, reqUpdateUserState, reqAddUser, reqUpdateUserInfoById, reqDeleteUserById, reqSetRolesByUserIdOrRoleId } from "@/utils/api";
 import { ElMessage } from "element-plus";
 
 
@@ -9,6 +9,12 @@ export const useUserInfoStore = defineStore('users', {
     state: () => ({
         // 表格数据
         users: [],
+        // 当前用户
+        curUser: {
+            id: '',
+            username: '',
+            role_name: ''
+        },
         // 参数
         queryInfo: {
             query: "",
@@ -16,14 +22,19 @@ export const useUserInfoStore = defineStore('users', {
             pagesize: 5,
         },
         total: "",
+        // 添加或修改用户的数据
         addForm: {
             username: "",
             password: "",
             email: "",
             mobile: "",
         },
+        // 激活的菜单，给面包屑用
+        activeMenus: JSON.parse(sessionStorage.getItem('activeMenus') || '[]'),
         // 控制添加用户的显示和隐藏
         dialogVisible: false,
+        // 分配角色对话框的显示和隐藏
+        setRolesDialogVisible: false,
         // 从修改用户对话框与添加用户对华框的切换
         isAdd: false,
     }),
@@ -60,7 +71,7 @@ export const useUserInfoStore = defineStore('users', {
             //   更新表格数据
             this.getUsers();
         },
-        // 通过指定id与修改后的值修改指定用户
+        // 通过指定id删除用户
         async deleteUserById(id) {
             let { data: res } = await reqDeleteUserById(id)
             if (res.meta.status != 200) return ElMessage({ message: res.meta.msg, showClose: true, type: "warning" });
@@ -68,6 +79,17 @@ export const useUserInfoStore = defineStore('users', {
             //   更新表格数据
             this.getUsers();
         },
+        // 分配角色
+        async setRolesByUserIdOrRoleId(roleId) {
+            let { data: res } = await reqSetRolesByUserIdOrRoleId(this.curUser.id, { rid: roleId })
+            console.log(res)
+
+            if (res.meta.status != 200) return ElMessage({ message: res.meta.msg, showClose: true, type: "warning" });
+            ElMessage({ message: res.meta.msg, showClose: true, type: "success" });
+            //   更新表格数据
+            this.getUsers();
+        },
+
 
     },
 })

@@ -17,7 +17,7 @@
         <span>{{ item1.authName }}</span>
       </template>
       <el-menu-item-group v-for="(item2, index) in item1.children" :key="item2.id">
-        <el-menu-item :index="item2.path" @click="saveActivePath(item2.path)">{{ item2.authName }}</el-menu-item>
+        <el-menu-item :index="item2.path" @click="saveActivePath(item2)">{{ item2.authName }}</el-menu-item>
       </el-menu-item-group>
     </el-sub-menu>
   </el-menu>
@@ -27,6 +27,9 @@
 import { ElMessage } from "element-plus";
 import { reqGetMenus } from "@/utils/api";
 import { reactive, onMounted } from "vue";
+import { useUserInfoStore } from "@/store/users.js";
+
+const usersStore = useUserInfoStore();
 
 const state = reactive({
   menus: [],
@@ -40,10 +43,25 @@ async function getMenus() {
   state.menus = res.data;
 }
 
-function saveActivePath(path) {
-  sessionStorage.setItem("activePath", path);
+function saveActivePath(c2) {
+  sessionStorage.setItem("activePath", c2.path);
   state.activePath = sessionStorage.getItem("activePath");
+
+  usersStore.activeMenus[1] = c2.authName;
+  // 长时间放到会话存储里
+  sessionStorage.setItem("activeMenus", JSON.stringify(usersStore.activeMenus));
 }
+
+// 展开菜单的回调
+const handleOpen = id => {
+  let c1 = state.menus.find(item => item.id == id);
+  if (!usersStore.activeMenus.find(item => c1.authName == item)) {
+    usersStore.activeMenus = [];
+    // 保存当前激活的一级菜单
+    usersStore.activeMenus[0] = c1.authName;
+  }
+};
+
 onMounted(() => {
   getMenus();
   state.activePath = sessionStorage.getItem("activePath");

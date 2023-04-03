@@ -30,8 +30,6 @@
 <script setup>
 import { useUserInfoStore } from "@/store/users.js";
 import { reactive, ref } from "vue";
-import { reqAddUser } from "@/utils/api";
-import { ElMessage } from "element-plus";
 
 const usersStore = useUserInfoStore();
 

@@ -21,7 +21,9 @@
       <template v-slot:default="{ row, index }">
         <el-button type="primary" :icon="Edit" @click="modifyUser(row)" circle />
         <el-button type="danger" :icon="Delete" @click="deleteHandler(row.id)" circle />
-        <el-button type="warning" :icon="HelpFilled" circle />
+        <el-tooltip class="box-item" effect="dark" content="分配角色" placement="top">
+          <el-button type="warning" :icon="HelpFilled" @click="setRole(row)" circle />
+        </el-tooltip>
       </template>
     </el-table-column>
   </el-table>
@@ -33,8 +35,11 @@
 import { Edit, Delete, HelpFilled } from "@element-plus/icons-vue";
 import { onMounted } from "vue";
 import { useUserInfoStore } from "@/store/users.js";
+import { useRightsStore } from "@/store/rights.js";
 import { ElMessage, ElMessageBox } from "element-plus";
+
 const usersStore = useUserInfoStore();
+const rightsStore = useRightsStore();
 
 function updateUserState({ id, mg_state }) {
   usersStore.updateUserState(id, mg_state);
@@ -60,6 +65,14 @@ const deleteHandler = id => {
         message: "已取消删除!",
       });
     });
+};
+
+const setRole = row => {
+  usersStore.setRolesDialogVisible = true;
+  // 发送请求获取角色列表
+  rightsStore.getRolesList();
+  // 拿到所要分配的当前用户
+  Object.assign(usersStore.curUser, row);
 };
 
 onMounted(() => {

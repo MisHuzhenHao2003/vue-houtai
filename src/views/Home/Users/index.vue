@@ -1,7 +1,7 @@
 <template>
   <div class="users-box">
-    <BreadCrumb></BreadCrumb>
     <Dialog></Dialog>
+    <SetRolesDialog></SetRolesDialog>
     <el-card class="box-card">
       <!-- 添加用户 -->
       <el-row :gutter="20">
@@ -37,8 +37,8 @@
 import { Search } from "@element-plus/icons-vue";
 import UsersTable from "./components/UsersTable.vue";
 import Dialog from "./components/Dialog.vue";
+import SetRolesDialog from "./components/SetRolesDialog.vue";
 import { useUserInfoStore } from "@/store/users.js";
-import { reqAddUser } from "../../../utils/api";
 const usersStore = useUserInfoStore();
 
 // 页数或每页数据发生改变时的回调

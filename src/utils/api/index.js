@@ -36,3 +36,35 @@ export function reqUpdateUserInfoById(id, data) {
 export function reqDeleteUserById(id) {
     return request.delete(`users/${id}`)
 }
+// 获取所有权限列表
+export function reqGetRights(type) {
+    return request.get(`rights/${type}`)
+}
+// 获取角色列表
+export function reqGetRolesList() {
+    return request.get(`roles`)
+}
+// 添加角色
+export function reqAddRoles(data) {
+    return request.post("/roles", data)
+}
+// 编辑角色
+export function reqUpdateRolesInfoById(id, data) {
+    return request.put(`roles/${id}`, data)
+}
+// 通过id删除指定角色
+export function reqDeleteRolesById(id) {
+    return request.delete(`roles/${id}`)
+}
+// 通过id删除角色指定权限
+export function reqDeleteRightsById(roleId, rightId) {
+    return request.delete(`roles/${roleId}/rights/${rightId}`)
+}
+// 通过角色id给指定角色权限
+export function reqSetRightsByRoleId(roleId, data) {
+    return request.post(`roles/${roleId}/rights`, data)
+}
+// 通过指定用户id和指定角色id给用户分配角色
+export function reqSetRolesByUserIdOrRoleId(userId, data) {
+    return request.put(`users/${userId}/role`, data)
+}
