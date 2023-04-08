@@ -80,8 +80,4 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" scoped>
-.el-table {
-  margin-top: 20px;
-}
-</style>
+<style lang="scss" scoped></style>

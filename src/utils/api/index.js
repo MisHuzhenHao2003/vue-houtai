@@ -68,3 +68,59 @@ export function reqSetRightsByRoleId(roleId, data) {
 export function reqSetRolesByUserIdOrRoleId(userId, data) {
     return request.put(`users/${userId}/role`, data)
 }
+// 获取商品分类数据列表
+export function reqGetCategories(params) {
+    return request.get(`categories`, { params })
+}
+// 添加分类
+export function reqAddCater(data) {
+    return request.post(`categories`, data)
+}
+// 删除分类
+export function reqDeleteCateById(id) {
+    return request.delete(`categories/${id}`)
+}
+// 修改分类
+export function reqUpdateById(id, data) {
+    return request.put(`categories/${id}`, data)
+}
+// 获取动态和静态参数列表
+export function regGetManyOrOnlyList(id, params) {
+    return request.get(`categories/${id}/attributes`, { params })
+}
+// 添加动态或静态参数
+export function regAddManyOrOnlyList(id, data) {
+    return request.post(`categories/${id}/attributes`, data)
+}
+//删除参数
+export function reqDeleteParams(id, attrid) {
+    return request.delete(`categories/${id}/attributes/${attrid}`)
+}
+//编辑提交参数
+export function reqUpdateParams(id, attrid, data) {
+    return request.put(`categories/${id}/attributes/${attrid}`, data)
+}
+// 获取商品列表数据
+export function reqGetGoods(params) {
+    return request.get(`goods`, { params })
+}
+// 删除商品
+export function reqDeleteGoods(id) {
+    return request.delete(`goods/${id}`)
+}
+// 添加商品
+export function reqAddGoods(data) {
+    return request.post(`goods`, data)
+}
+// 获取订单数据列表
+export function reqGetOrderList(params) {
+    return request.get(`orders`, { params })
+}
+// 获取物流信息
+export function reqGetLogistics(id) {
+    return request.get(`kuaidi/${id}`,)
+}
+// 获取物折线图数据
+export function reqGetReportsData() {
+    return request.get(`reports/type/1`)
+}

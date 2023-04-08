@@ -68,6 +68,8 @@ const deleteHandler = id => {
 };
 
 const setRole = row => {
+  rightsStore;
+
   usersStore.setRolesDialogVisible = true;
   // 发送请求获取角色列表
   rightsStore.getRolesList();

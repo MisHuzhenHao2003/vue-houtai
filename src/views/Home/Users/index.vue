@@ -56,16 +56,7 @@ const addUser = () => {
 </script>
 
 <style lang="scss" scoped>
-.box-card {
+.el-pagination {
   margin-top: 20px;
-  .el-col {
-    margin-bottom: 20px;
-  }
-  .el-button {
-    height: 100%;
-  }
-  .el-pagination {
-    margin-top: 20px;
-  }
 }
 </style>

@@ -30,7 +30,30 @@ const routes = [
         path: 'roles',
         component: () => import('@/views/Home/Roles')
       },
-
+      {
+        path: 'categories',
+        component: () => import('@/views/Home/CateGories')
+      },
+      {
+        path: 'goods',
+        component: () => import('@/views/Home/Goods')
+      },
+      {
+        path: 'addGoods',
+        component: () => import('@/views/Home/AddGoods'),
+      },
+      {
+        path: 'params',
+        component: () => import('@/views/Home/Params')
+      },
+      {
+        path: 'orders',
+        component: () => import('@/views/Home/Orders')
+      },
+      {
+        path: 'reports',
+        component: () => import('@/views/Home/Reports')
+      },
     ]
   }
 ]
