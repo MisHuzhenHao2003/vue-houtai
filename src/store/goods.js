@@ -175,7 +175,8 @@ export const useGoodsStore = defineStore('goods', {
             let { data: res } = await reqDeleteCateById(id);
             if (res.meta.status != 200) return ElMessage({ message: res.meta.msg, showClose: true, type: "warning" });
             ElMessage({ message: res.meta.msg, showClose: true, type: "success" });
-            this.getCategories()
+            this.getGoods()
+            console.log(id)
         },
         // 添加商品
         async addGoods(data) {
