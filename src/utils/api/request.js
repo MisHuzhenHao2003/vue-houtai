@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const request = axios.create({
-    baseURL: 'http://127.0.0.1:8888/api/private/v1/',
-    timeout: 5000
+    baseURL: 'http://8.130.115.205:8887/api/private/v1/',
+    timeout: 50000
 })
 
 // 添加请求拦截器
